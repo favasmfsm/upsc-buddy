@@ -3,7 +3,8 @@
 Multi-tenant visual revision for UPSC — academy subdomains, invite-only students, syllabus Subject → Chapter spine + visual concept blocks.
 
 Product vision: [product_info.md](product_info.md)  
-Module notes: [docs/MODULES.md](docs/MODULES.md)
+Module notes: [docs/MODULES.md](docs/MODULES.md)  
+Deploying: [DEPLOY.md](DEPLOY.md)
 
 ## Stack
 

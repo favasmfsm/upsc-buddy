@@ -45,8 +45,6 @@ services:
     <<: *backend
     command:
       [
-        "pipenv",
-        "run",
         "gunicorn",
         "--workers=2",
         "--bind=0.0.0.0:8300",
@@ -63,8 +61,6 @@ services:
     <<: *backend
     command:
       [
-        "pipenv",
-        "run",
         "celery",
         "-A",
         "core",
@@ -77,7 +73,7 @@ services:
   beat:
     <<: *backend
     command:
-      ["pipenv", "run", "celery", "-A", "core", "beat", "--loglevel=info"]
+      ["celery", "-A", "core", "beat", "--loglevel=info"]
     restart: unless-stopped
 
   frontend:

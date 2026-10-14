@@ -73,20 +73,35 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
 
-if AWS_STORAGE_BUCKET_NAME:
-    STORAGES = {
-        "default": {
-            "BACKEND": "core.custom_storages.MediaStorage",
-        },
-        "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-        },
-    }
+# Django serves its own static files (admin, DRF) via WhiteNoise; no nginx needed.
+MIDDLEWARE.insert(
+    MIDDLEWARE.index("django.middleware.security.SecurityMiddleware") + 1,
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+)
+
+STORAGES = {
+    "default": {
+        "BACKEND": (
+            "core.custom_storages.MediaStorage"
+            if AWS_STORAGE_BUCKET_NAME
+            else "django.core.files.storage.FileSystemStorage"
+        ),
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", REDIS_URL)
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", REDIS_URL)
 
-EMAIL_BACKEND = "anymail.backends.amazon_ses.EmailBackend"
+# SES when AWS credentials are set; otherwise emails are only printed to the logs.
+EMAIL_BACKEND = os.getenv(
+    "EMAIL_BACKEND",
+    "anymail.backends.amazon_ses.EmailBackend"
+    if AWS_ACCESS_KEY_ID
+    else "django.core.mail.backends.console.EmailBackend",
+)
 ANYMAIL = {
     "AMAZON_SES_CLIENT_PARAMS": {
         "region_name": os.getenv("AWS_SES_REGION_NAME", AWS_S3_REGION_NAME),

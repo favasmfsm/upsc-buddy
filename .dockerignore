@@ -1,0 +1,15 @@
+.git
+.env
+.venv
+**/__pycache__
+*.py[cod]
+.DS_Store
+.cursor
+.vscode
+db/*.sqlite3
+data/
+books/
+media/
+static/
+frontend/
+docs/

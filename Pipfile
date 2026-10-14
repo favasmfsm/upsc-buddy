@@ -20,6 +20,7 @@ django-anymail = "*"
 requests = "*"
 pypdf = "*"
 google-genai = "*"
+whitenoise = "*"
 
 [dev-packages]
 coverage = "*"
