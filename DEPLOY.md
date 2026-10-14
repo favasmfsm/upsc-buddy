@@ -73,11 +73,12 @@ NEXT_PUBLIC_DEFAULT_ACADEMY=fortuneias
 
 Click **Deploy** (top of the canvas) to apply all pending changes. If the backend already failed earlier, open it → **Deployments → ⋯ → Redeploy**.
 
-What happens on each backend deploy (`scripts/predeploy.sh`):
+What happens each time the backend starts (`scripts/start.sh` → `scripts/predeploy.sh`):
 1. Database migrations run.
 2. If `RUN_SEEDS=true`, all content seeds run (`scripts/seed_all.sh`).
+3. gunicorn starts serving.
 
-Open the backend's **Deployments → View logs → Pre-deploy** tab and look for:
+Open the backend's **Deployments → View logs → Deploy Logs** and look for:
 
 ```
 invite_code: XXXXXXXXXX
@@ -155,6 +156,7 @@ These need extra pieces; add them when you need them:
 | Symptom | Fix |
 |---|---|
 | Backend crash: `DJANGO_SECRET_KEY ... required` or `DB_NAME ... required` | Variables missing — redo step 3, then redeploy. |
+| `DB_...` variables show `<empty string>` (eye icon) even though Postgres exists | `${{Postgres...}}` references were added before the database existed and never resolved. Replace them with the literal values from the Postgres service's Variables tab (use its copy button for the password). Same for Redis. |
 | `Bad Request (400)` on the backend URL | `ALLOWED_HOSTS` doesn't include the domain you're visiting. |
 | Frontend loads but shows no data / network errors | `NEXT_PUBLIC_API_URL` is wrong, or backend `CORS_ALLOWED_ORIGINS` doesn't match the frontend URL. Changing `NEXT_PUBLIC_*` needs a **redeploy** of the frontend (it's baked in at build time). |
 | Admin pages have no styling | Check the backend build log for a `collectstatic` error. |

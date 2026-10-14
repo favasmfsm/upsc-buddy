@@ -1,5 +1,5 @@
 #!/bin/sh
-# Runs before each backend deploy (Railway preDeployCommand).
+# Runs at container start (scripts/start.sh), before gunicorn.
 set -e
 
 python manage.py migrate --noinput

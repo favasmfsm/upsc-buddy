@@ -21,5 +21,5 @@ COPY . .
 RUN DJANGO_SECRET_KEY=build DB_NAME=x DB_USERNAME=x DB_PASSWORD=x DB_HOST=x \
     python manage.py collectstatic --noinput
 
-# Hosts like Railway inject $PORT; locally it falls back to 8300.
-CMD ["sh", "-c", "gunicorn core.wsgi:application --workers=2 --timeout=120 --bind=0.0.0.0:${PORT:-8300}"]
+# Runs migrations (+ optional seeds), then gunicorn on $PORT (8300 locally).
+CMD ["sh", "scripts/start.sh"]
