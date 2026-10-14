@@ -1,0 +1,6 @@
+# Dependencies
+node_modules
+.next
+out
+.env*.local
+npm-debug.log*

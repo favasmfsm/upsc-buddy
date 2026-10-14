@@ -1,0 +1,47 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block content %}
+  <div class="module" style="margin-bottom: 20px; padding: 12px 15px;">
+    <h2 style="margin-top: 0;">Sync FINDER range</h2>
+    <p class="help" style="margin-bottom: 12px;">
+      Scrape missing daily PDFs, create documents for gaps, and enqueue quiz generation.
+      Check regenerate to replace PDFs and force-regenerate existing days (max 62 days).
+    </p>
+    <form method="post" action="{% url 'admin:current_affairs_cadocument_finder_sync' %}">
+      {% csrf_token %}
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: end;">
+        <div>
+          <label for="id_finder_academy">Academy</label><br>
+          <select name="academy_id" id="id_finder_academy" required>
+            {% for academy in finder_academies %}
+              <option value="{{ academy.pk }}"{% if academy.slug == "fortuneias" %} selected{% endif %}>
+                {{ academy.name }} ({{ academy.slug }})
+              </option>
+            {% empty %}
+              <option value="">No academies</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="id_finder_start">From</label><br>
+          <input type="date" name="start" id="id_finder_start" required>
+        </div>
+        <div>
+          <label for="id_finder_end">To</label><br>
+          <input type="date" name="end" id="id_finder_end" required>
+        </div>
+        <div style="padding-bottom: 4px;">
+          <label>
+            <input type="checkbox" name="regenerate" value="1">
+            Regenerate existing
+          </label>
+        </div>
+        <div>
+          <input type="submit" value="Sync FINDER" class="default">
+        </div>
+      </div>
+    </form>
+  </div>
+  {{ block.super }}
+{% endblock %}

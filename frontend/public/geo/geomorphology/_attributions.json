@@ -1,0 +1,79 @@
+{
+  "earth-interior": {
+    "source": "Vision IAS CCAB-2 Geography (PDF extract)",
+    "title": "Page 10",
+    "license": "Copyrighted — private revision use only",
+    "artist": "Vision IAS",
+    "descriptionurl": ""
+  },
+  "seismic-discontinuity": {
+    "source": "Vision IAS CCAB-2 Geography (PDF extract)",
+    "title": "Page 10",
+    "license": "Copyrighted — private revision use only",
+    "artist": "Vision IAS",
+    "descriptionurl": ""
+  },
+  "plate-boundaries": {
+    "source": "Wikimedia Commons",
+    "title": "File:Tectonic plate boundaries.png",
+    "license": "Public domain",
+    "artist": "Jose F. Vigil. USGS",
+    "descriptionurl": "https://commons.wikimedia.org/wiki/File:Tectonic_plate_boundaries.png"
+  },
+  "fold-types": {
+    "source": "Wikimedia Commons",
+    "title": "File:Anticline-Syncline-s-ink-FabioCrameri.png",
+    "license": "CC BY-SA 4.0",
+    "artist": "Fabio Crameri",
+    "descriptionurl": "https://commons.wikimedia.org/wiki/File:Anticline-Syncline-s-ink-FabioCrameri.png"
+  },
+  "fault-types": {
+    "source": "Vision IAS CCAB-2 Geography (PDF extract)",
+    "title": "Page 33",
+    "license": "Copyrighted — private revision use only",
+    "artist": "Vision IAS",
+    "descriptionurl": ""
+  },
+  "volcano-types": {
+    "source": "Vision IAS CCAB-2 Geography (PDF extract)",
+    "title": "Page 37",
+    "license": "Copyrighted — private revision use only",
+    "artist": "Vision IAS",
+    "descriptionurl": ""
+  },
+  "world-seismic-belts": {
+    "source": "Vision IAS CCAB-2 Geography (PDF extract)",
+    "title": "Page 35",
+    "license": "Copyrighted — private revision use only",
+    "artist": "Vision IAS",
+    "descriptionurl": ""
+  },
+  "india-seismic-zones": {
+    "source": "Vision IAS CCAB-2 Geography (PDF extract)",
+    "title": "Page 36",
+    "license": "Copyrighted — private revision use only",
+    "artist": "Vision IAS",
+    "descriptionurl": ""
+  },
+  "rock-cycle": {
+    "source": "Wikimedia Commons",
+    "title": "File:Rock cycle nps.PNG",
+    "license": "Public domain",
+    "artist": "NPS",
+    "descriptionurl": "https://commons.wikimedia.org/wiki/File:Rock_cycle_nps.PNG"
+  },
+  "soil-profile": {
+    "source": "Wikimedia Commons",
+    "title": "File:Soil Horizon Boundary Topography Diagram.jpg",
+    "license": "Public domain",
+    "artist": "USDA Natural Resources Conservation Service",
+    "descriptionurl": "https://commons.wikimedia.org/wiki/File:Soil_Horizon_Boundary_Topography_Diagram.jpg"
+  },
+  "seismic-shadow-zone": {
+    "source": "Wikimedia Commons",
+    "title": "File:Seismic wave travel through Earth.png",
+    "license": "CC BY-SA 4.0",
+    "artist": "Karla Panchuk, Steven Earle",
+    "descriptionurl": "https://commons.wikimedia.org/wiki/File:Seismic_wave_travel_through_Earth.png"
+  }
+}

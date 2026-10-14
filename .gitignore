@@ -1,0 +1,29 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+db/db.sqlite3
+.env
+*.egg-info/
+.Python
+frontend/node_modules/
+frontend/.next/
+.DS_Store
+staticfiles/
+media/
+.coverage
+htmlcov/
+
+books/
+
+# Large source PDFs (keep out of git; upload to storage separately)
+data/
+
+# collectstatic output
+static/
+
+# Local / editor
+db/*.sqlite3
+frontend/tsconfig.tsbuildinfo
+frontend/.env*.local
+.cursor/

@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+celery = {extras = ["redis"], version = "*"}
+redis = "*"
+psycopg2-binary = "*"
+gunicorn = "*"
+boto3 = "*"
+django-storages = "*"
+django-celery-results = "*"
+pillow = "*"
+django-anymail = "*"
+requests = "*"
+pypdf = "*"
+google-genai = "*"
+
+[dev-packages]
+coverage = "*"
+
+[requires]
+python_version = "3.13"

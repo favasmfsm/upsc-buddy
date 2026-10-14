@@ -1,0 +1,98 @@
+x-backend: &backend
+  build:
+    context: .
+  env_file:
+    - ".env"
+  environment:
+    PIPENV_DONT_LOAD_ENV: "1"
+    DJANGO_SETTINGS_MODULE: core.settings.dev
+    DB_NAME: upsc_buddy
+    DB_USERNAME: upsc_buddy
+    DB_PASSWORD: upsc_buddy
+    DB_HOST: db
+    DB_PORT: "5432"
+    REDIS_URL: redis://redis:6379/0
+    CELERY_BROKER_URL: redis://redis:6379/0
+    CELERY_RESULT_BACKEND: redis://redis:6379/0
+    CACHE_URL: redis://redis:6379/1
+    FRONTEND_URL: http://localhost:3000
+  depends_on:
+    - db
+    - redis
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: upsc_buddy
+      POSTGRES_USER: upsc_buddy
+      POSTGRES_PASSWORD: upsc_buddy
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  backend:
+    <<: *backend
+    command:
+      [
+        "pipenv",
+        "run",
+        "gunicorn",
+        "--workers=2",
+        "--bind=0.0.0.0:8300",
+        "core.wsgi:application",
+      ]
+    ports:
+      - "8300:8300"
+    restart: unless-stopped
+    volumes:
+      - static_volume:/home/app/static
+      - media_volume:/home/app/media
+
+  worker:
+    <<: *backend
+    command:
+      [
+        "pipenv",
+        "run",
+        "celery",
+        "-A",
+        "core",
+        "worker",
+        "--loglevel=info",
+        "--max-tasks-per-child=1000",
+      ]
+    restart: unless-stopped
+
+  beat:
+    <<: *backend
+    command:
+      ["pipenv", "run", "celery", "-A", "core", "beat", "--loglevel=info"]
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8300
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  static_volume:
+  media_volume:
